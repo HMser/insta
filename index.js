@@ -1,4 +1,5 @@
-const express = require('express');
+/*
+con);
 
 const puppeteer = require('puppeteer');
 
@@ -103,5 +104,41 @@ app.listen(port, () => {
   console.log(`App listening at ${port}`);
 
 });
+*/
 
+const express = require('express');
+const instaScraper = require('instagram-basic-data-scraper-with-username');
 
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+
+app.post('/profile', (req, res) => {
+  const username = req.body.username;
+  instaScraper(username)
+    .then((data) => {
+      const profilePicUrl = data.profilePicUrl;
+      const followerCount = data.edgeFollowedBy.count;
+      const postCount = data.edgeOwnerToTimelineMedia.count;
+      const responseData = {
+        profilePicUrl: profilePicUrl,
+        followerCount: followerCount,
+        postCount: postCount
+      };
+      res.json(responseData);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: 'Error retrieving profile data' });
+    });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
+});
