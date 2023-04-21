@@ -1,0 +1,30 @@
+{
+
+  "name": "instagram-profile-checker",
+
+  "version": "1.0.0",
+
+  "description": "A Node.js app that checks Instagram profiles",
+
+  "main": "index.js",
+
+  "scripts": {
+
+    "start": "node index.js"
+
+  },
+
+  "author": "Hashir (github.com/HMser)",
+
+  "license": "MIT",
+
+  "dependencies": {
+
+    "express": "^4.17.1",
+
+    "puppeteer": "^10.4.0"
+
+  }
+
+}
+
