@@ -4,8 +4,8 @@ const axios = require('axios');
 const app = express();
 const port = 3000;
 
-// Route to fetch Instagram profile details
-app.get('/profile/:username', async (req, res) => {
+//h Route to fetch Instagram profile details
+app.get('/:username', async (req, res) => {
   const username = req.params.username;
   const url = `https://levanter.onrender.com/ig?q=${username}`;
   
